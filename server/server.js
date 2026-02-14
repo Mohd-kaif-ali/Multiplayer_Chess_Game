@@ -27,12 +27,17 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
 // Socket.IO logic placeholder
 const socketManager = require('./sockets/index');
 
 // Initialize Socket Manager
 socketManager(io);
+
+// Export for Vercel
+module.exports = app;
+
+if (require.main === module) {
+    server.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
